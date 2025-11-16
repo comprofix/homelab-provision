@@ -1,0 +1,4 @@
+traefik_api_password: "admin:$2y$05$HaHZuLnZDSuVF8cdVYeyQuxPEXPW9r1KKnqiO1cu5WJ./.l1qNZHy"
+CF_API_EMAIL: support@comprofix.com
+CF_DNS_API_TOKEN: "YD_v2mcnXbJPGL1K-X-AGtoRu4uZs6um1b21DrOk"
+traefik_api_user: "admin"

@@ -7,8 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-
+    runs-on: self-hosted
     # Run entire job **inside a container that already has Ansible**
     container:
       image: quay.io/ansible/creator-ee:latest
@@ -48,7 +47,7 @@ jobs:
       
       - name: Create vars file
         run: |
-          echo 'traefik_host: "vps02.comprofix.com"' > vars.yml
+          echo 'traefik_host: "traefik.comprofix.xyz"' > vars.yml
           echo 'traefik_api_password: "${{ secrets.TRAEFIK_API_PASSWORD }}"' >> vars.yml
           echo 'CF_API_EMAIL: "${{ secrets.CF_API_EMAIL }}"' >> vars.yml
           echo 'CF_DNS_API_TOKEN: "${{ secrets.CF_DNS_API_TOKEN }}"' >> vars.yml

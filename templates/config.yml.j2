@@ -10,12 +10,26 @@ http:
       middlewares:
         - default-headers
         - https-redirect
+    
+    jellyfin-router:
+      entryPoints:
+        - https
+      rule: "Host(`jellyfin.comprofix.xyz`)"
+      service: jellyfin-service
+      tls: {}
+      middlewares:
+        - jellyfin-headers
 
   services:
     oc-service:
       loadBalancer:
         servers:
           - url: https://omada-lxc.comprofix.xyz:8043 # change it to actual ip of the controller
+    
+    jellyfin-service:
+      loadBalancer:
+        servers:
+          - url: http://jellyfin-srv.comprofix.xyz:8096
     
   middlewares:
     https-redirect:
@@ -36,6 +50,19 @@ http:
         customFrameOptionsValue: SAMEORIGIN
         customRequestHeaders:
           X-Forwarded-Proto: https
+    
+    jellyfin-headers:
+      headers:
+        frameDeny: false               # Jellyfin uses iframes for some features
+        browserXssFilter: true
+        contentTypeNosniff: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 15552000
+        customRequestHeaders:
+          X-Forwarded-Proto: https
+
 
     default-whitelist:
       IPAllowList:

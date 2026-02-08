@@ -6,7 +6,7 @@
     - name: Create directories
       file:
         path: "/data"
-        state: directory 
+        state: directory
 
   roles:
     - role: geerlingguy.docker
@@ -17,45 +17,40 @@
     - name: Gather facts (always, even with tags)
       ansible.builtin.setup:
       tags: always
-    
+
     - name: Update system
       import_tasks: tasks/base.yml
 
     - name: Deploy traefik
-      import_tasks: tasks/traefik.yml 
+      import_tasks: tasks/traefik.yml
 
     - name: Deploy Dozzle
-      import_tasks: tasks/dozzle.yml 
-    
+      import_tasks: tasks/dozzle.yml
+
     - name: Deploy Portainer
-      import_tasks: tasks/portainer.yml 
+      import_tasks: tasks/portainer.yml
+# - hosts: omada
+#   become: yes
+#   name: Configure Omada
+#   pre_tasks:
+#     - name: Create directories
+#       file:
+#         path: "/data"
+#         state: directory
 
-- hosts: omada
-  become: yes
-  name: Configure Omada
-  pre_tasks:
-    - name: Create directories
-      file:
-        path: "/data"
-        state: directory
-  
-  roles:
-    - role: geerlingguy.docker
-      docker_users:
-        - administrator
+#   roles:
+#     - role: geerlingguy.docker
+#       docker_users:
+#         - administrator
 
-  tasks:
-    - name: Gather facts (always, even with tags)
-      ansible.builtin.setup:
-      tags: always
-    
-    - name: Update system
-      import_tasks: tasks/base.yml
+#   tasks:
+#     - name: Gather facts (always, even with tags)
+#       ansible.builtin.setup:
+#       tags: always
 
-    - name: Deploy Portainer Agent
-      import_tasks: tasks/portainer-agent.yml
-    
-  
+#     - name: Update system
+#       import_tasks: tasks/base.yml
 
+#     - name: Deploy Portainer Agent
+#       import_tasks: tasks/portainer-agent.yml
 
- 

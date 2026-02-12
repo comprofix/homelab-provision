@@ -11,7 +11,7 @@
 - name: Create Portainer Agent
   docker_container:
     name: portainer-agent
-    image:  portainer/agent:2.38.0
+    image:  portainer/agent:2.38.1
     restart_policy: unless-stopped
     network_mode: host
     volumes:
